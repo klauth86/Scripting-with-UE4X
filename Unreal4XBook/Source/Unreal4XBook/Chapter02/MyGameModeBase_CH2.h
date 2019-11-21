@@ -19,7 +19,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UClassNames)
 		TSubclassOf<UUserProfile> UPBlueprintClassName;	
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		void CreateObject() {
 		UUserProfile* newobject = NewObject<UUserProfile>(
 			(UObject*)GetTransientPackage(),
