@@ -1,0 +1,38 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "AntiGravityVolume.h"
+#include "GravityObject.h"
+
+AAntiGravityVolume::AAntiGravityVolume() {
+	// Set this actor to call Tick() every frame. You can turn this off
+	// to improve performance if you don't need it.
+		PrimaryActorTick.bCanEverTick = true;
+	CollisionComponent = CreateDefaultSubobject<UBoxComponent>("CollisionComponent");
+	CollisionComponent->SetBoxExtent(FVector(200, 200, 400));
+	RootComponent = CollisionComponent;
+}
+
+void AAntiGravityVolume::BeginPlay()
+{
+	Super::BeginPlay();	
+}
+
+void AAntiGravityVolume::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+void AAntiGravityVolume::NotifyActorBeginOverlap(AActor* OtherActor) {
+	IGravityObject* GravityObject = Cast<IGravityObject>(OtherActor);
+	if (GravityObject != nullptr) {
+		GravityObject->DisableGravity();
+	}
+}
+
+void AAntiGravityVolume::NotifyActorEndOverlap(AActor* OtherActor) {
+	IGravityObject* GravityObject = Cast<IGravityObject>(OtherActor);
+	if (GravityObject != nullptr) {
+		GravityObject->EnableGravity();
+	}
+}
