@@ -14,7 +14,7 @@ class UNREAL4XBOOK_API AUnreal4XBookGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
-	
-	
+protected:
+	void BeginPlay() override;
 	
 };
